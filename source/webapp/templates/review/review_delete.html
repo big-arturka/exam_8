@@ -11,7 +11,7 @@
         {% csrf_token %}
         <h5 class="card-header">Удаление</h5>
         <div class="card-body">
-            <h5 class="card-title">Проект: "{{ project.name }}"</h5>
+            <h5 class="card-title">Продукт: "{{ review.product.name }}"</h5>
             <h5 class="card-title">Вы действительно хотите удалить отзыв: "{{ review.author }}"?</h5>
             <p class="card-text">Описание: {{ review.description }}</p>
             <p class="card-text">Оценка: {{ review.rating }}</p>
