@@ -32,7 +32,8 @@ class ReviewUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = 'webapp.change_review'
 
     def has_permission(self):
-        return super().has_permission() or self.request.user == self.request.user.is_authenticated
+        review = self.get_object()
+        return super().has_permission() or self.request.user == review.author
 
     def get_success_url(self):
         return reverse('product_view', kwargs={'pk': self.object.product.pk})
@@ -44,7 +45,8 @@ class ReviewDeleteView(PermissionRequiredMixin, DeleteView):
     permission_required = 'webapp.delete_review'
 
     def has_permission(self):
-        return super().has_permission() or self.request.user == self.request.user.is_authenticated
+        review = self.get_object()
+        return super().has_permission() or self.request.user == review.author
 
     def get_success_url(self):
         return reverse('product_view', kwargs={'pk': self.object.product.pk})
