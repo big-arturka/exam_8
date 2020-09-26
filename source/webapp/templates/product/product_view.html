@@ -39,7 +39,7 @@
                 {% for review in reviews %}
                     <div class="task-card card w-100">
                         <div class="card-body">
-                            <h5 class="card-title">{{ review.author }}</h5>
+                            <h5 class="card-title"><a href="{% url 'accounts:page' review.author.pk %}">{{ review.author }}</a></h5>
                             <p class="card-title">Описание задачи: {{ review.description }}</p>
                             {% if perms.webapp.change_review or request.user == review.author %}
                                 <a href="{% url 'review_update' review.pk %}" class="btn btn-primary">Изменить</a>

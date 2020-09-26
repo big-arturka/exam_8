@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Product{% endblock %}
+
+{% block auth_menu %}
+    {% if request.user.is_authenticated %}
+        <li class="nav-item active"><a class="nav-link" href="{% url 'accounts:logout' %}">Выйти</a></li>
+    {% else %}
+        <li class="nav-item active"><a class="nav-link" href="{% url 'accounts:login' %}">Войти</a></li>
+        <li class="nav-item active"><a class="nav-link" href="{% url 'accounts:create' %}?next={{ request.get_full_path }}">Sign Up</a></li>
+    {% endif %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <h1>Страница пользователя {{ user_obj.get_full_name|default:user_obj.username }}</h1>
+        {% if user_obj.profile.avatar %}
+            <img class="avatar" src="{{ user_obj.profile.avatar.url }}" width="250" height="250" alt="user picture">
+        {% endif %}
+        <p>Логин: {{ user_obj.username }}</p>
+        <p>Имя: {{ user_obj.first_name }}</p>
+        <p>Фамилия: {{ user_obj.last_name }}</p>
+        <p>Почта: {{ user_obj.email }}</p>
+
+        {% for review in reviews %}
+            <div class="task-card card w-100">
+                <div class="card-body">
+                    <h5 class="card-title">Автор: {{ review.author }}</h5>
+                    <p class="card-title">Описание : {{ review.description }}</p>
+                    {% if perms.webapp.change_review or request.user == review.author %}
+                        <a href="{% url 'review_update' review.pk %}" class="btn btn-primary">Изменить</a>
+                    {% endif %}
+
+                    {% if perms.webapp.delete_review or request.user == review.author %}
+                        <a href="{% url 'review_delete' review.pk %}" class="btn btn-primary">Удалить</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
