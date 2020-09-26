@@ -1,11 +1,10 @@
 from django.contrib.auth import login, get_user_model, update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
-from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView
 
 from accounts.forms import MyUserCreationForm, UserChangeForm, PasswordChangeForm, ProfileChangeForm
 
@@ -33,29 +32,6 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     model = get_user_model()
     template_name = 'users/user_detail.html'
     context_object_name = 'user_obj'
-    paginate_related_by = 5
-    paginate_related_orphans = 0
-
-    def get_context_data(self, **kwargs):
-        projects = self.object.projects.order_by('-start_date')
-        paginator = Paginator(projects, self.paginate_related_by, orphans=self.paginate_related_orphans)
-        page_number = self.request.GET.get('page', 1)
-        page = paginator.get_page(page_number)
-        kwargs['page_obj'] = page
-        kwargs['projects'] = page.object_list
-        kwargs['is_paginated'] = page.has_other_pages()
-        return super().get_context_data(**kwargs)
-
-
-class UsersListView(PermissionRequiredMixin, ListView):
-    template_name = 'users/users_view.html'
-    context_object_name = 'users'
-    paginate_by = 10
-    paginate_orphans = 4
-    permission_required = 'accounts.can_view_users'
-
-    def get_queryset(self):
-        return User.objects.all()
 
 
 class UserChangeView(UserPassesTestMixin, UpdateView):

@@ -41,11 +41,11 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ review.author }}</h5>
                             <p class="card-title">Описание задачи: {{ review.description }}</p>
-                            {% if perms.webapp.change_review %}
+                            {% if perms.webapp.change_review or request.user == review.author %}
                                 <a href="{% url 'review_update' review.pk %}" class="btn btn-primary">Изменить</a>
                             {% endif %}
 
-                            {% if perms.webapp.delete_review%}
+                            {% if perms.webapp.delete_review or request.user == review.author %}
                                 <a href="{% url 'review_delete' review.pk %}" class="btn btn-primary">Удалить</a>
                             {% endif %}
                         </div>
@@ -53,14 +53,11 @@
                 {% endfor %}
 
                 <div class="new_task">
-                    {% if perms.webapp.add_review %}
+                    {% if request.user.is_authenticated %}
                         <a href="{% url "review_create" product.pk %}" class="btn btn-primary btn-lg btn-block">Добавить новый отзыв</a>
                     {% endif %}
                 </div>
 
-            </div>
-            <div class="card-footer text-muted">
-{#                Дата создания: {{ project.start_date }}{% if project.end_date %} | Дата завершения: {{ project.end_date }}{% endif %}#}
             </div>
         </div>
     </div>
