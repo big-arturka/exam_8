@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Update Task{% endblock %}
+
+{% block menu %}
+{% endblock %}
+
+{% block content %}
+    <div class="form">
+        <h1 class="title">Update Task</h1>
+
+        {% url 'task_update' project.pk task.pk as action_url %}
+        {% include 'partial/form.html' with action_url=action_url form_method='post' button_text='Обновить' %}
+        <a href="{% url 'task_view' project.pk task.pk %}" class="btn btn-primary">Назад</a>
+
+    </div>
+{% endblock %}

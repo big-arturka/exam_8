@@ -1,0 +1,42 @@
+[
+{
+  "model": "webapp.product",
+  "pk": 1,
+  "fields": {
+    "name": "\u041c\u043e\u043b\u043e\u043a\u043e",
+    "category": "food",
+    "description": "\u0414\u043e\u043c\u0430\u0448\u043d\u0435\u0435 \u043c\u043e\u043b\u043e\u043a\u043e.",
+    "image": "user_pics/pit-ili-ne-pit-polza-i-vred-moloka-1838-57129.jpg"
+  }
+},
+{
+  "model": "webapp.product",
+  "pk": 2,
+  "fields": {
+    "name": "\u0414\u0440\u0435\u043b\u044c",
+    "category": "tools",
+    "description": "\u0425\u043e\u0440\u043e\u0448\u0430\u044f \u0434\u0440\u0435\u043b\u044c \u043d\u0435\u043c\u0435\u0446\u043a\u043e\u0433\u043e \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0441\u0442\u0432\u0430.",
+    "image": "user_pics/drel.jpeg"
+  }
+},
+{
+  "model": "webapp.product",
+  "pk": 3,
+  "fields": {
+    "name": "\u0421\u0442\u0438\u0440\u0430\u043b\u044c\u043d\u0430\u044f \u043c\u0430\u0448\u0438\u043d\u0430.",
+    "category": "tech",
+    "description": "\u0421\u0442\u0438\u0440\u0430\u043b\u044c\u043d\u0430\u044f \u043c\u0430\u0448\u0438\u043d\u0430.\r\n\u0412\u043c\u0435\u0441\u0442\u0438\u043c\u043e\u0441\u0442\u044c 5\u043a\u0433.",
+    "image": "user_pics/mash.jpg"
+  }
+},
+{
+  "model": "webapp.review",
+  "pk": 1,
+  "fields": {
+    "product": 2,
+    "author": 1,
+    "description": "\u0422\u0430\u043a\u0430\u044f \u0441\u0435\u0431\u0435 \u0434\u0440\u0435\u043b\u044c \u0435\u0441\u043b\u0438 \u0447\u0435\u0441\u0442\u043d\u043e.",
+    "rating": 3
+  }
+}
+]
