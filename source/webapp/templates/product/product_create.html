@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}New Project{% endblock %}
+{% block title %}New Product{% endblock %}
 
 {% block menu %}
 {% endblock %}
@@ -8,7 +8,7 @@
     <div class="form">
         <h1 class="title">Add new project</h1>
 
-        {% url 'project_create' as action_url %}
+        {% url 'product_create' as action_url %}
         {% include 'partial/form.html' with action_url=action_url form_method='post' button_text='Сохранить'%}
 
     </div>

@@ -19,16 +19,16 @@
                     <li class="list-group-item">{{ product.get_category_display}}</li>
                 </ul>
                 <div class="card-body">
-                    <a href="#" class="card-link">Подробнее...</a>
-                    <a href="#" class="card-link">Редактировать</a>
-                    <a href="#" class="card-link">Удалить</a>
+                    <a href="{% url 'product_view' product.pk %}" class="card-link">Подробнее...</a>
+                    <a href="{% url 'product_update' product.pk %}" class="card-link">Редактировать</a>
+                    <a href="{% url 'product_delete' product.pk %}" class="card-link">Удалить</a>
                 </div>
             </div>
         {% endfor %}
     </div>
 
     <div class="new_task">
-{#        <a href="{% url "product_create" %}" class="btn btn-primary btn-lg btn-block">Добавить новый продукт</a>#}
+        <a href="{% url "product_create" %}" class="btn btn-primary btn-lg btn-block">Добавить новый продукт</a>
     </div>
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}

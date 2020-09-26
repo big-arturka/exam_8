@@ -2,63 +2,61 @@
 {% block title %}Product{% endblock %}
 
 {% block auth_menu %}
-{#    {% if request.user.is_authenticated %}#}
-{#        {% if perms.webapp.add_task and request.user in project.user.all %}#}
-{#            <a href="{% url "task_create" project.pk %}" class="nav-link active">Добавить новую задачу</a>#}
-{#        {% endif %}#}
-{#        <li class="nav-item active"><a class="nav-link" href="{% url 'accounts:logout' %}">Выйти</a></li>#}
-{#    {% else %}#}
-{#        <li class="nav-item active"><a class="nav-link" href="{% url 'accounts:login' %}">Войти</a></li>#}
-{#    <li class="nav-item active"><a class="nav-link" href="{% url 'accounts:create' %}?next={{ request.get_full_path }}">Sign Up</a></li>#}
-{#    {% endif %}#}
+    {% if request.user.is_authenticated %}
+        {% if perms.webapp.add_task %}
+            <a href="{% url "review_create" product.pk %}" class="nav-link active">Добавить новую задачу</a>
+        {% endif %}
+        <li class="nav-item active"><a class="nav-link" href="{% url 'accounts:logout' %}">Выйти</a></li>
+    {% else %}
+        <li class="nav-item active"><a class="nav-link" href="{% url 'accounts:login' %}">Войти</a></li>
+        <li class="nav-item active"><a class="nav-link" href="{% url 'accounts:create' %}?next={{ request.get_full_path }}">Sign Up</a></li>
+    {% endif %}
 {% endblock %}
 
-{#{% if product.image %}#}
-{#    <img class="avatar" src="{{ product.image.url }}" width="250" height="250" alt="user picture">#}
-{#{% else %}#}
-{#    <img class="avatar" src="../../static/img/pusto.png" width="250" height="250" alt="user picture">#}
-{#{% endif %}#}
+
 {% block content %}
     <div class="container">
-        <h1 class="title">Project View</h1>
+        <h1 class="title">Product View</h1>
         <div class="card text-center">
             <div class="card-header">
                 <h4 class="card-title">{{ product.name }}</h4>
             </div>
             <div class="card-body">
-                <p class="card-text">Описание: {{ project.description }}</p>
+            {% if product.image %}
+                <img class="avatar" src="{{ product.image.url }}" width="225" height="225" alt="user picture">
+            {% else %}
+                <img class="avatar" src="../../static/img/pusto.png" width="225" height="225" alt="user picture">
+            {% endif %}
+                <p class="card-text">Описание: {{ product.description }}</p>
                 <a href="{% url 'index' %}" class="btn btn-primary" >На главную</a>
-{#                {% if perms.webapp.change_project and request.user in project.user.all %}#}
-{#                    <a href="{% url 'project_update' project.pk %}" class="btn btn-primary">Обновить</a>#}
-{#                {% endif %}#}
-{#                {% if perms.webapp.delete_project and request.user in project.user.all %}#}
-{#                    <a href="{% url 'project_delete' project.pk %}" class="btn btn-primary">Удалить</a>#}
-{#                {% endif %}#}
+                {% if perms.webapp.change_product%}
+                    <a href="{% url 'product_update' product.pk %}" class="btn btn-primary">Обновить</a>
+                {% endif %}
+                {% if perms.webapp.delete_product %}
+                    <a href="{% url 'product_delete' product.pk %}" class="btn btn-primary">Удалить</a>
+                {% endif %}
 
                 {% for review in reviews %}
                     <div class="task-card card w-100">
                         <div class="card-body">
                             <h5 class="card-title">{{ review.author }}</h5>
                             <p class="card-title">Описание задачи: {{ review.description }}</p>
-{#                            <p class="card-text"><p>Тип: {% for item in task.task_type.all %}{{ item.type }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>#}
-{#                            <a href="{% url 'task_view' project.pk task.pk %}" class="btn btn-primary">Подробнее</a>#}
-{##}
-{#                            {% if perms.webapp.change_task and request.user in project.user.all %}#}
-{#                                <a href="{% url 'task_update' project.pk task.pk %}" class="btn btn-primary">Изменить</a>#}
-{#                            {% endif %}#}
-{##}
-{#                            {% if perms.webapp.delete_task and request.user in project.user.all %}#}
-{#                                <a href="{% url 'task_delete' project.pk task.pk %}" class="btn btn-primary">Удалить</a>#}
-{#                            {% endif %}#}
+                            {% if perms.webapp.change_review %}
+                                <a href="{% url 'review_update' review.pk %}" class="btn btn-primary">Изменить</a>
+                            {% endif %}
+
+                            {% if perms.webapp.delete_review%}
+                                <a href="{% url 'review_delete' review.pk %}" class="btn btn-primary">Удалить</a>
+                            {% endif %}
                         </div>
                     </div>
                 {% endfor %}
 
-{#                <div class="new_task">#}
-{#                    {% if perms.webapp.add_task and request.user in project.user.all %}#}
-{#                        <a href="{% url "task_create" project.pk %}" class="btn btn-primary btn-lg btn-block">Добавить новую задачу</a>#}
-{#                    {% endif %}#}
-{#                </div>#}
+                <div class="new_task">
+                    {% if perms.webapp.add_review %}
+                        <a href="{% url "review_create" product.pk %}" class="btn btn-primary btn-lg btn-block">Добавить новый отзыв</a>
+                    {% endif %}
+                </div>
 
             </div>
             <div class="card-footer text-muted">
