@@ -90,6 +90,16 @@
   }
 },
 {
+  "model": "webapp.review",
+  "pk": 10,
+  "fields": {
+    "product": 5,
+    "author": 3,
+    "description": "123",
+    "rating": 5
+  }
+},
+{
   "model": "accounts.profile",
   "pk": 1,
   "fields": {

@@ -56,6 +56,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Автор отзыва: <a href="{% url 'accounts:page' review.author.pk %}">{{ review.author }}</a></h5>
                             <p class="card-title">Описание : {{ review.description }}</p>
+                            <p class="card-title">Почта : {{ review.author.email }}</p>
                             <div class="rating-2">Оценка пользователя:
                                 {% if review.rating == 1 %}
                                     <img src="../../static/img/1.png" width="200" height="30" alt="">
