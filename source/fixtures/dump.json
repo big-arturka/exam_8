@@ -31,11 +31,11 @@
 },
 {
   "model": "webapp.product",
-  "pk": 4,
+  "pk": 5,
   "fields": {
-    "name": "\u0442\u043e\u0432\u0430\u0440",
-    "category": "food",
-    "description": "\u043e\u043f\u0438\u0441\u0430\u043d\u0438\u0435",
+    "name": "moderator",
+    "category": "tools",
+    "description": "\u044b\u0441\u043c\u041c\u0412\u044f\u044b\u0447",
     "image": ""
   }
 },
@@ -67,6 +67,26 @@
     "author": 2,
     "description": "bla bla",
     "rating": 4
+  }
+},
+{
+  "model": "webapp.review",
+  "pk": 8,
+  "fields": {
+    "product": 1,
+    "author": 1,
+    "description": "\u0432\u0441\u0451 \u043a\u0440\u0443\u0442\u043e",
+    "rating": 5
+  }
+},
+{
+  "model": "webapp.review",
+  "pk": 9,
+  "fields": {
+    "product": 1,
+    "author": 1,
+    "description": "\u0444\u0438\u0433\u043d\u044f",
+    "rating": 1
   }
 },
 {

@@ -9,6 +9,11 @@
 {% block content %}
     <div class="main_page">
         <h1 class="title">RevieWs</h1>
+        <div class="new_task">
+            {% if perms.webapp.add_product %}
+                <a href="{% url "product_create" %}" class="btn btn-primary btn-lg btn-block">Добавить новый продукт</a>
+            {% endif %}
+        </div>
         {% for product in products %}
             <div class="card">
                 <div class="card-body">
@@ -21,18 +26,23 @@
                 </ul>
                 <div class="card-body">
                     <a href="{% url 'product_view' product.pk %}" class="card-link btn btn-primary">Подробнее...</a>
-                    <a href="{% url 'product_update' product.pk %}" class="card-link btn btn-primary">Редактировать</a>
-                    <a href="{% url 'product_delete' product.pk %}" class="card-link btn btn-primary">Удалить</a>
+                    {% if perms.webapp.change_product %}
+                        <a href="{% url 'product_update' product.pk %}" class="card-link btn btn-primary">Редактировать</a>
+                    {% endif %}
+                    {% if perms.webapp.delete_product %}
+                        <a href="{% url 'product_delete' product.pk %}" class="card-link btn btn-primary">Удалить</a>
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}
     </div>
 
     <div class="new_task">
-        <a href="{% url "product_create" %}" class="btn btn-primary btn-lg btn-block">Добавить новый продукт</a>
+        {% if perms.webapp.add_product %}
+            <a href="{% url "product_create" %}" class="btn btn-primary btn-lg btn-block">Добавить новый продукт</a>
+        {% endif %}
     </div>
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}
     {% endif %}
 {% endblock %}
-
