@@ -19,8 +19,21 @@
         <h1 class="title">Product View</h1>
         <div class="card text-center">
             <div class="card-header">
-                <h4 class="card-title">{{ product.name }}</h4>
-                <p>Средняя оценка: {{ product.get_avg }}</p>
+                <h4 class="card-title">Название: {{ product.name }}</h4>
+                <div class="rating">Рейтинг:
+                    {% if product.get_avg == 1 %}
+                        <img src="../../static/img/1.png" width="234" height="41" alt="">
+                    {% elif product.get_avg == 2 %}
+                        <img src="../../static/img/2.png" width="234" height="41"  alt="">
+                    {% elif product.get_avg == 3 %}
+                        <img src="../../static/img/3.png" width="234" height="41" alt="">
+                    {% elif product.get_avg == 4 %}
+                        <img src="../../static/img/4.png" width="234" height="41" alt="">
+                    {% elif product.get_avg == 5 %}
+                        <img src="../../static/img/5.png" width="234" height="41" alt="">
+                    {% else %}
+                        <img src="../../static/img/0.png" width="234" height="41" alt="">
+                    {% endif %}</div>
             </div>
             <div class="card-body">
             {% if product.image %}
@@ -28,7 +41,8 @@
             {% else %}
                 <img class="avatar" src="../../static/img/pusto.png" width="225" height="225" alt="user picture">
             {% endif %}
-                <p class="card-text">Описание: {{ product.description }}</p>
+                <h4 class="card-text">Категория: {{ product.get_category_display }}</h4>
+                <h5 class="card-text">Описание: {{ product.description }}</h5>
                 <a href="{% url 'index' %}" class="btn btn-primary" >На главную</a>
                 {% if perms.webapp.change_product%}
                     <a href="{% url 'product_update' product.pk %}" class="btn btn-primary">Обновить</a>
@@ -42,7 +56,20 @@
                         <div class="card-body">
                             <h5 class="card-title">Автор отзыва: <a href="{% url 'accounts:page' review.author.pk %}">{{ review.author }}</a></h5>
                             <p class="card-title">Описание : {{ review.description }}</p>
-                            <p class="card-title">Оценка : {{ review.rating }}</p>
+                            <div class="rating-2">Оценка пользователя:
+                                {% if review.rating == 1 %}
+                                    <img src="../../static/img/1.png" width="200" height="30" alt="">
+                                {% elif review.rating == 2 %}
+                                    <img src="../../static/img/2.png"width="200" height="30"  alt="">
+                                {% elif review.rating == 3 %}
+                                    <img src="../../static/img/3.png" width="200" height="30" alt="">
+                                {% elif review.rating == 4 %}
+                                    <img src="../../static/img/4.png" width="200" height="30" alt="">
+                                {% elif review.rating == 5 %}
+                                    <img src="../../static/img/5.png" width="200" height="30" alt="">
+                                {% else %}
+                                    <img src="../../static/img/0.png" width="200" height="30" alt="">
+                                {% endif %}</div>
                             {% if perms.webapp.change_review or request.user == review.author %}
                                 <a href="{% url 'review_update' review.pk %}" class="btn btn-primary">Изменить</a>
                             {% endif %}
