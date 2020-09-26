@@ -12,16 +12,17 @@
         {% for product in products %}
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{ product.name}}</h5>
-                    <p class="card-text">{{ product.description }}</p>
+                    <h5 class="card-title">Название: {{ product.name}}</h5>
+                    <p class="card-text">Описание: {{ product.description }}</p>
+                    <p>Категория товара: {{ product.get_category_display}}</p>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">{{ product.get_category_display}}</li>
+                    <li class="list-group-item"><h2>Средняя оценка: {{ product.get_avg }}</h2></li>
                 </ul>
                 <div class="card-body">
-                    <a href="{% url 'product_view' product.pk %}" class="card-link">Подробнее...</a>
-                    <a href="{% url 'product_update' product.pk %}" class="card-link">Редактировать</a>
-                    <a href="{% url 'product_delete' product.pk %}" class="card-link">Удалить</a>
+                    <a href="{% url 'product_view' product.pk %}" class="card-link btn btn-primary">Подробнее...</a>
+                    <a href="{% url 'product_update' product.pk %}" class="card-link btn btn-primary">Редактировать</a>
+                    <a href="{% url 'product_delete' product.pk %}" class="card-link btn btn-primary">Удалить</a>
                 </div>
             </div>
         {% endfor %}

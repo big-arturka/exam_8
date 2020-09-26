@@ -26,6 +26,16 @@ class Product(models.Model):
     description = models.TextField(max_length=2000, null=True, blank=True, verbose_name='Описание')
     image = models.ImageField(null=True, blank=True, upload_to='user_pics', verbose_name='Изображение')
 
+    def get_avg(self):
+        avg = 0
+        reviews = Review.objects.filter(product=self.pk)
+        if reviews:
+            for i in reviews:
+                avg += int(i.rating)
+            return round(avg / len(reviews))
+        else:
+            return avg
+
     def __str__(self):
         return f'{self.pk}-{self.name}'
 

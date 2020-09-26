@@ -20,6 +20,7 @@
         <div class="card text-center">
             <div class="card-header">
                 <h4 class="card-title">{{ product.name }}</h4>
+                <p>Средняя оценка: {{ product.get_avg }}</p>
             </div>
             <div class="card-body">
             {% if product.image %}
@@ -39,8 +40,9 @@
                 {% for review in reviews %}
                     <div class="task-card card w-100">
                         <div class="card-body">
-                            <h5 class="card-title"><a href="{% url 'accounts:page' review.author.pk %}">{{ review.author }}</a></h5>
-                            <p class="card-title">Описание задачи: {{ review.description }}</p>
+                            <h5 class="card-title">Автор отзыва: <a href="{% url 'accounts:page' review.author.pk %}">{{ review.author }}</a></h5>
+                            <p class="card-title">Описание : {{ review.description }}</p>
+                            <p class="card-title">Оценка : {{ review.rating }}</p>
                             {% if perms.webapp.change_review or request.user == review.author %}
                                 <a href="{% url 'review_update' review.pk %}" class="btn btn-primary">Изменить</a>
                             {% endif %}

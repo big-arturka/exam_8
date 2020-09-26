@@ -38,6 +38,14 @@ class ProductCreateView(PermissionRequiredMixin, CreateView):
     model = Product
     permission_required = 'webapp.add_product'
 
+    def post(self, request, *args, **kwargs):
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
     def get_success_url(self):
         return reverse('product_view', kwargs={'pk': self.object.pk})
 
@@ -47,6 +55,14 @@ class ProductUpdateView(PermissionRequiredMixin, UpdateView):
     form_class = ProductForm
     model = Product
     permission_required = 'webapp.change_product'
+
+    def post(self, request, *args, **kwargs):
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
 
     def get_success_url(self):
         return reverse('product_view', kwargs={'pk': self.object.pk})

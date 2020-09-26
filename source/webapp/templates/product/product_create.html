@@ -6,10 +6,10 @@
 
 {% block content %}
     <div class="form">
-        <h1 class="title">Add new project</h1>
+        <h1 class="title">Add new product</h1>
 
         {% url 'product_create' as action_url %}
-        {% include 'partial/form.html' with action_url=action_url form_method='post' button_text='Сохранить'%}
+        {% include 'partial/form.html' with action_url=action_url form_method='post' button_text='Сохранить' enctype="multipart/form-data"%}
 
     </div>
 {% endblock %}
